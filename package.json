@@ -1,4 +1,5 @@
 {
+   
   "name": "git-hooks-nodejs",
   "version": "1.0.0",
   "main": "index.js",
@@ -13,6 +14,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
     "@eslint/js": "^9.24.0",
     "@eslint/json": "^0.11.0",
     "eslint": "^8.57.1",
@@ -27,7 +29,9 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "post-commit": "npm run success-message"
+      
     }
   },
   "lint-staged": {
@@ -35,5 +39,17 @@
       "eslint",
       "jest --findRelatedTests"
     ]
-  }
+  },
+    
+    "commitlint": {
+      "rules": {
+        "references-empty": [2, "never"]
+      },
+      "parserPreset": {
+        "parserOpts": {
+          "issuePrefixes": ["ISSUE-"]
+        }
+      }
+    }
+    
 }
